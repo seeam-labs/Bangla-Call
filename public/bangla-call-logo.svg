@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+  <defs>
+    <clipPath id="logo-rounded">
+      <rect x="0" y="0" width="500" height="500" rx="95" ry="95" />
+    </clipPath>
+    <linearGradient id="cyan-glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark Rounded Square Container -->
+  <rect x="0" y="0" width="500" height="500" rx="95" ry="95" fill="#05070a" />
+
+  <!-- Dotted Wireframe Globe Grid Effect (Left & Ambient) -->
+  <g fill="#ffffff" opacity="0.95">
+    <!-- Outer Sphere Arc Tiles -->
+    <path d="M120 70 a180 180 0 0 1 120 20 h-25 a150 150 0 0 0 -95 -15 z" opacity="0.4"/>
+    
+    <!-- Top & Outer Latitude grid dashes -->
+    <rect x="140" y="55" width="22" height="12" rx="4" transform="rotate(-30 140 55)"/>
+    <rect x="175" y="48" width="26" height="12" rx="4" transform="rotate(-20 175 48)"/>
+    <rect x="215" y="46" width="30" height="12" rx="4" transform="rotate(-10 215 46)"/>
+    <rect x="260" y="48" width="30" height="12" rx="4" transform="rotate(0 260 48)"/>
+    <rect x="305" y="55" width="26" height="12" rx="4" transform="rotate(12 305 55)"/>
+    <rect x="345" y="68" width="22" height="12" rx="4" transform="rotate(25 345 68)"/>
+
+    <!-- Row 2 -->
+    <rect x="110" y="90" width="24" height="14" rx="4" transform="rotate(-32 110 90)"/>
+    <rect x="150" y="80" width="28" height="14" rx="4" transform="rotate(-20 150 80)"/>
+    <rect x="195" y="75" width="34" height="14" rx="4" transform="rotate(-8 195 75)"/>
+    <rect x="245" y="75" width="34" height="14" rx="4"/>
+    <rect x="295" y="80" width="30" height="14" rx="4" transform="rotate(12 295 80)"/>
+    <rect x="340" y="92" width="24" height="14" rx="4" transform="rotate(25 340 92)"/>
+
+    <!-- Row 3 -->
+    <rect x="85" y="130" width="24" height="16" rx="4" transform="rotate(-35 85 130)"/>
+    <rect x="125" y="118" width="30" height="16" rx="4" transform="rotate(-22 125 118)"/>
+    <rect x="175" y="110" width="36" height="16" rx="4" transform="rotate(-10 175 110)"/>
+    <rect x="230" y="108" width="38" height="16" rx="4"/>
+
+    <!-- Left side Globe Curvature Grid -->
+    <rect x="65" y="180" width="26" height="18" rx="5" transform="rotate(-35 65 180)"/>
+    <rect x="105" y="165" width="32" height="18" rx="5" transform="rotate(-20 105 165)"/>
+    <rect x="155" y="155" width="38" height="18" rx="5" transform="rotate(-8 155 155)"/>
+
+    <rect x="50" y="235" width="28" height="20" rx="5" transform="rotate(-35 50 235)"/>
+    <rect x="90" y="218" width="34" height="20" rx="5" transform="rotate(-20 90 218)"/>
+    <rect x="140" y="208" width="40" height="20" rx="5" transform="rotate(-8 140 208)"/>
+
+    <rect x="42" y="295" width="28" height="20" rx="5" transform="rotate(-35 42 295)"/>
+    <rect x="82" y="278" width="34" height="20" rx="5" transform="rotate(-20 82 278)"/>
+    <rect x="132" y="268" width="40" height="20" rx="5" transform="rotate(-8 132 268)"/>
+
+    <rect x="48" y="355" width="26" height="18" rx="5" transform="rotate(-30 48 355)"/>
+    <rect x="88" y="338" width="32" height="18" rx="5" transform="rotate(-18 88 338)"/>
+
+    <!-- Bottom Globe Grid Curve -->
+    <rect x="70" y="410" width="24" height="16" rx="4" transform="rotate(-25 70 410)"/>
+    <rect x="110" y="398" width="28" height="16" rx="4" transform="rotate(-12 110 398)"/>
+    <rect x="155" y="390" width="32" height="16" rx="4"/>
+    <rect x="200" y="390" width="34" height="16" rx="4" transform="rotate(8 200 390)"/>
+
+    <rect x="120" y="445" width="24" height="14" rx="4" transform="rotate(-18 120 445)"/>
+    <rect x="160" y="438" width="28" height="14" rx="4"/>
+    <rect x="205" y="435" width="32" height="14" rx="4" transform="rotate(10 205 435)"/>
+    <rect x="250" y="432" width="32" height="14" rx="4" transform="rotate(18 250 432)"/>
+    <rect x="295" y="420" width="28" height="14" rx="4" transform="rotate(25 295 420)"/>
+    <rect x="335" y="405" width="24" height="14" rx="4" transform="rotate(32 335 405)"/>
+  </g>
+
+  <!-- Text Section -->
+  <g>
+    <!-- Red B -->
+    <text x="140" y="255" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="108" fill="#dc2626" letter-spacing="-2">B</text>
+    
+    <!-- White ANGLA -->
+    <text x="210" y="255" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="108" fill="#ffffff" letter-spacing="-1">ANGLA</text>
+
+    <!-- Phone Receiver Icon + Sound Waves -->
+    <g transform="translate(138, 272) scale(1.35)">
+      <!-- Phone Body -->
+      <path d="M6 2a2 2 0 0 0-2 2v2a12 12 0 0 0 12 12h2a2 2 0 0 0 2-2v-3a1 1 0 0 0-1-1h-2.5a1 1 0 0 0-.8.4l-1.2 1.6a9 9 0 0 1-5.5-5.5l1.6-1.2a1 1 0 0 0 .4-.8V3a1 1 0 0 0-1-1H6z" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Audio signal arcs -->
+      <path d="M14 4a5 5 0 0 1 5 5" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M14 1a8 8 0 0 1 8 8" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+
+    <!-- CALL text -->
+    <text x="212" y="318" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="58" fill="#ffffff" letter-spacing="4">CALL</text>
+
+    <!-- Tagline: inventing new ways to communicate -->
+    <text x="142" y="352" font-family="Georgia, serif, sans-serif" font-style="italic" font-weight="600" font-size="22" fill="url(#cyan-glow)" letter-spacing="0.2">inventing new ways to communicate</text>
+  </g>
+</svg>

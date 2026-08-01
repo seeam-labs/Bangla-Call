@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bangla-call",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-08-01",
+
+  // React SPA served as static assets; the Worker runs only for /api/*.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+
+  "observability": { "enabled": true },
+
+  // Daily retention/cleanup (03:00 UTC). Auto-purges old photos/NID and logs.
+  "triggers": { "crons": ["0 3 * * *"] },
+
+  // Bindings are declared WITHOUT ids/names-with-ids so the "Deploy to Cloudflare"
+  // button (and `wrangler deploy`) auto-provision them on first deploy.
+  "d1_databases": [
+    { "binding": "DB", "database_name": "banglacall-db" }
+  ],
+  "kv_namespaces": [
+    { "binding": "KV" }
+  ],
+  "r2_buckets": [
+    { "binding": "UPLOADS", "bucket_name": "banglacall-uploads" }
+  ]
+}

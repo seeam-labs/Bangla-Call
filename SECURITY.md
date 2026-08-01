@@ -21,8 +21,9 @@ acknowledge within 72 hours.
   integration HTML-escapes every interpolated value.
 - **Rate limiting.** Login, uploads, lead submission, AI, and banner endpoints are
   rate-limited per client IP via KV fixed windows.
-- **Uploads.** Live photos / NID images go to a private R2 bucket. They are served
-  only through signed, time-limited HMAC URLs — never public.
+- **Uploads.** Live photos / NID images are stored privately (KV by default, or a
+  private R2 bucket if R2 is enabled). They are served only through signed,
+  time-limited HMAC URLs — never public.
 - **Privacy.** Visitor and lead records store a salted hash of the IP, not the raw
   address. The visitor table is capped.
 - **Transport & headers.** A strict Content-Security-Policy plus
@@ -35,6 +36,7 @@ acknowledge within 72 hours.
 
 1. Set a long random `JWT_SECRET` and a separate `UPLOAD_SIGNING_SECRET`.
 2. Change the bootstrap admin password on first login.
-3. Restrict the R2 bucket to private access (default).
+3. If you enable R2, keep the bucket private (default). Otherwise images live in KV,
+   which is private and only reachable via signed URLs.
 4. Rotate `GEMINI_API_KEY` / `TELEGRAM_BOT_TOKEN` if they were ever exposed.
 5. Review the audit log periodically (admin panel).

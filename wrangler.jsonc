@@ -23,8 +23,15 @@
   ],
   "kv_namespaces": [
     { "binding": "KV" }
-  ],
-  "r2_buckets": [
-    { "binding": "UPLOADS", "bucket_name": "banglacall-uploads" }
   ]
+
+  // R2 is OPTIONAL and currently disabled so the app deploys without enabling R2
+  // on your account. Photo/NID uploads use the built-in KV fallback until R2 is on.
+  //
+  // To switch to R2 (recommended for image storage): enable R2 in the Cloudflare
+  // Dashboard (Storage & Databases -> R2), then add this binding and redeploy:
+  //
+  // "r2_buckets": [
+  //   { "binding": "UPLOADS", "bucket_name": "banglacall-uploads" }
+  // ]
 }

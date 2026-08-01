@@ -12,7 +12,7 @@ fixes and re-verification.
 | Frontend type safety | `tsc --noEmit` (src) | clean |
 | Worker type safety (strict) | `tsc --noEmit -p worker/tsconfig.json` | clean |
 | Production build | `vite build` | success |
-| Deploy config + Worker bundle | `wrangler deploy --dry-run` | valid (D1/KV/R2 bound, cron accepted) |
+| Deploy config + Worker bundle | `wrangler deploy --dry-run` | valid (D1 + KV bound; R2 optional/off; cron accepted) |
 | End-to-end API suite | real bundled Worker + local SQLite/KV/R2 | **52/52 passed** |
 | Live number-availability API | proxy vs `amarip.net` | **3/3** (available/taken/empty) |
 
@@ -123,7 +123,15 @@ Fixes:
 
 - One-click Deploy to Cloudflare; bindings auto-provision (no IDs to paste).
 - DB self-initializes; signing secrets auto-generate; owner created via first-run wizard.
-- Daily retention cron; R2->KV upload fallback; strict security headers; marketing
+- Daily retention cron; uploads default to KV (R2 optional, one-line enable); strict security headers; marketing
   integrations all optional and admin-configurable.
+
+## Deployment note — R2 disabled by default
+
+To avoid the common `[code: 10042] Please enable R2` deploy failure on accounts that
+haven't activated R2, the `r2_buckets` binding is commented out in `wrangler.jsonc`.
+Photo/NID uploads use the **KV fallback** (verified end-to-end, 6/6). To use R2, enable
+it in the dashboard and uncomment the binding — the code already reads/writes whichever
+store is present.
 
 **Status: green. No known bugs or errors.**

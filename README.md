@@ -8,7 +8,7 @@ in the repo, so it's safe to publish.
 
 - **Frontend:** React 19 + Vite 6 + TypeScript + Tailwind CSS 4
 - **Backend:** a single Cloudflare Worker (Hono) with static assets
-- **Data:** Cloudflare D1 (SQLite) · KV · R2 (private image storage)
+- **Data:** Cloudflare D1 (SQLite) · KV (image storage by default) · R2 (optional, recommended for images)
 - **AI:** Google Gemini via REST, with a deterministic offline fallback
 - **Alerts:** Telegram Bot API
 
@@ -24,8 +24,8 @@ in the repo, so it's safe to publish.
 When you click it, Cloudflare will:
 
 1. Fork the repo into your GitHub and connect CI/CD (auto-deploy on every push).
-2. **Auto-provision** the D1 database, KV namespace, and R2 bucket declared in
-   `wrangler.jsonc` — no IDs to create or paste.
+2. **Auto-provision** the D1 database and KV namespace declared in `wrangler.jsonc`
+   — no IDs to create or paste. (R2 is off by default; see below.)
 3. Build and deploy the Worker + static site.
 
 ### Then finish in the browser (no terminal)
@@ -41,12 +41,20 @@ That's it. The app **configures itself on first run**: the database schema is cr
 automatically, and the signing secrets are generated and stored for you. Nothing else
 is required.
 
-#### One caveat: R2
+#### Storage: KV by default, R2 optional
 
-The live-photo / NID capture feature uses **R2**. R2 is free (10 GB) but must be
-**enabled once** on your Cloudflare account (Dashboard → *Storage & Databases → R2* →
-enable). If R2 isn't enabled, the rest of the site still works and uploads transparently
-fall back to KV storage.
+Photo/NID uploads are stored in **KV by default**, so the app deploys with **no extra
+setup** (you do *not* need to enable R2). This avoids the common `[code: 10042]
+"Please enable R2"` deploy failure.
+
+For production, **R2 is the recommended home for images** (bigger objects, cheaper,
+no KV write limits). To switch to R2:
+
+1. Enable R2 in the Cloudflare Dashboard (*Storage & Databases → R2* — free 10 GB tier;
+   you may need a payment method on file).
+2. Uncomment the `r2_buckets` binding at the bottom of `wrangler.jsonc`.
+3. Redeploy. New uploads go to R2 automatically (the code already falls back to KV when
+   R2 is absent, and reads from whichever store an object lives in).
 
 ---
 
@@ -75,7 +83,7 @@ request; there is no migration step.
 | Concern | Behavior |
 |---|---|
 | **Database schema** | Created automatically on the first request (idempotent). No `db:migrate`. |
-| **Resources (D1/KV/R2)** | Auto-provisioned by the Deploy button from `wrangler.jsonc` (bindings declared without IDs). |
+| **Resources (D1/KV)** | Auto-provisioned by the Deploy button from `wrangler.jsonc` (bindings declared without IDs). R2 is optional/off by default. |
 | **Signing secrets** | `JWT_SECRET` / `UPLOAD_SIGNING_SECRET` auto-generated and stored in KV if unset. Env vars override. |
 | **Admin account** | First-run setup wizard creates the owner. No default password ships. |
 | **Gemini / Telegram** | Optional; configured in the admin panel (stored write-only) or via env vars. |
@@ -150,9 +158,12 @@ locally). CI can run `npm run lint`, `npm run typecheck`, `npm run build`, and `
 
 ## Troubleshooting
 
-- **Live photo / NID upload does nothing.** R2 must be enabled on your account
-  (Dashboard → *Storage & Databases → R2* → enable — it's free). Until then,
-  uploads transparently fall back to KV, but enabling R2 is recommended.
+- **Deploy fails with `[code: 10042] Please enable R2`.** You don't need R2 — this
+  build ships with the R2 binding disabled and uploads stored in KV. If you *want* R2,
+  enable it in the dashboard and uncomment the `r2_buckets` binding in `wrangler.jsonc`
+  (see "Storage: KV by default, R2 optional" above).
+- **Photo / NID uploads.** They work out of the box via KV. For production image
+  storage, switch to R2 (steps above).
 - **"Create Owner Account" doesn't appear / I see a login screen instead.** An owner
   already exists. If you're locked out, delete the row in the `admin_users` table
   (Dashboard → D1 → your database → Console) and reload.
